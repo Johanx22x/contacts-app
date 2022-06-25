@@ -15,4 +15,3 @@ try {
   die("PDO Connection Error: " . $e->getMessage());
 }
 
-?>

@@ -14,9 +14,7 @@
       $phoneNumber = $_POST["phone_number"];
         
       $statement = $conn->prepare("INSERT INTO contacts (name, phone_number) VALUES (:name, :phoneNumber)");
-      $statement->bindParam(":name", $_POST["name"]);
-      $statement->bindParam(":phone_number", $_POST["phone_number"]);
-      $statement->execute();
+      $statement->execute([":name" => $_POST["name"], ":phone_number" => $_POST["phone_number"]]);
 
       header("Location: index.php");
     }
@@ -74,7 +72,7 @@
             <a class="nav-link" href="/contacts-app/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/contacts-app/add.html">Add Contact</a>
+            <a class="nav-link" href="/contacts-app/add.php">Add Contact</a>
           </li>
         </ul>
       </div>
