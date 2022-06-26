@@ -16,7 +16,7 @@
       $statement = $conn->prepare("INSERT INTO contacts (name, phone_number) VALUES (:name, :phone_number)");
       $statement->execute([":name" => $_POST["name"], ":phone_number" => $_POST["phone_number"]]);
 
-      header("Location: index.php");
+      header("Location: home.php");
     }
   }
 
