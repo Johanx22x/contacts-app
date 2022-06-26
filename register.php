@@ -25,6 +25,16 @@
             ":password" => password_hash($_POST["password"], PASSWORD_BCRYPT)
           ]);
 
+          $statement = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+          $statement->bindParam(":email", $_POST["email"]);
+          $statement->execute();
+          $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+          session_start();
+
+          unset($user["password"]);
+          $_SESSION["user"] = $user;
+
           header("Location: home.php");
       }
     }
@@ -54,7 +64,7 @@
                 </div>
     
                 <div class="mb-3 row">
-                  <label for="phone_number" class="col-md-4 col-form-label text-md-end">Email</label>
+                  <label for="email" class="col-md-4 col-form-label text-md-end">Email</label>
     
                   <div class="col-md-6">
                     <input id="email" type="email" class="form-control" name="email" required autocomplete="email" autofocus>
