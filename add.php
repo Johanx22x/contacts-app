@@ -23,7 +23,10 @@
       $statement = $conn->prepare("INSERT INTO contacts (user_id, name, phone_number) VALUES ({$_SESSION['user']['id']}, :name, :phone_number)");
       $statement->execute([":name" => $_POST["name"], ":phone_number" => $_POST["phone_number"]]);
 
+      $_SESSION["flash"] = ["message" => "Contact {$_POST['name']} added."];
+
       header("Location: home.php");
+      return;
     }
   }
 
